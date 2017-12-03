@@ -1,5 +1,7 @@
 package com.rajendra.demo;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,16 +36,16 @@ public class ArticleRepositoryTest {
 		article.setCategory("Movie");
 		entityManager.persist(article);
 		entityManager.flush();
-		
+
 		// when
 		Article result = articleRepository.findById(article.getId());
-		
+
 		// then
 		System.out.println("=========== Article Id When Persist =========");
 		System.out.println(article.getId());
 		System.out.println("=========== Article Id After FindById Method =========");
 		System.out.println(article.getId());
-		assert (result.getId() == article.getId());
+		assertEquals(article.getId(), result.getId());
 	}
 
 }
