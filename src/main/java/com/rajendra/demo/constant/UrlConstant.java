@@ -10,13 +10,6 @@ public class UrlConstant {
 
 	// Url for root
 	public static final String URL_ROOT = "/";
-	
-	
-	
-	//TODO 
-	
-	// Url for error
-	public static final String URL_ERROR = URL_ROOT + "error";
 
 	// Url for list
 	public static final String URL_LIST = URL_ROOT + "list";
@@ -33,7 +26,6 @@ public class UrlConstant {
 	// Url for delete
 	public static final String URL_DELETE = URL_ROOT + "delete";
 
-	// Url for student controller
-	public static final String URL_STUDENT = URL_ROOT + "student";
-
+	// Url for article controller
+	public static final String URL_ARTICLE = URL_ROOT + "article";
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,19 +33,20 @@
 								<div class="col-md-1"></div>
 								<div class="col-md-2">
 									<ul class="nav nav-pills nav-stacked">
-										<li><a href='<c:url value="/"/>'><i class="fa fa-home"></i> Home</a></li>
+										<li><a href='<c:url value="/"/>'><i
+												class="fa fa-home"></i> Home</a></li>
 									</ul>
 								</div>
 								<div class="col-md-2">
 									<ul class="nav nav-pills nav-stacked">
-										<li><a href='<c:url value="/article/create"/>'><i class="fa fa-plus"></i> Add
-												Article</a></li>
+										<li><a href='<c:url value="/article/create"/>'><i
+												class="fa fa-plus"></i> Add Article</a></li>
 									</ul>
 								</div>
 								<div class="col-md-2">
 									<ul class="nav nav-pills nav-stacked">
-										<li><a href='<c:url value="/article/list"/>'><i class="fa fa-list"></i> All
-												Article</a></li>
+										<li><a href='<c:url value="/article/list"/>'><i
+												class="fa fa-list"></i> All Article</a></li>
 									</ul>
 								</div>
 							</div>
@@ -54,11 +56,60 @@
 						<div class="info d-flex align-items-center">
 							<div class="content text-center"
 								style="width: 80%; margin: 0 auto;">
-								<div class="logo">
-									<h1>Article</h1>
+								<c:if test="${!empty info}">
+									<div class="alert alert-warning alert-white rounded">
+										<c:out value="${info}" />
+									</div>
+								</c:if>
+								<c:if test="${!empty success}">
+									<div class="alert alert-success alert-white rounded">
+										<c:out value="${success}" />
+									</div>
+								</c:if>
+								<c:if test="${!empty error}">
+									<div class="alert alert-danger alert-white rounded">
+										<c:out value="${error}" />
+									</div>
+								</c:if>
+								<div class="clearfix"></div>
+								<div class="card">
+									<div class="card-header d-flex align-items-center">
+										<h3 class="h4" style="color: #000;">Create Article</h3>
+									</div>
+									<div class="card-body">
+										<c:url var="createUrl" value="/article/create" />
+										<form:form method="post" modelAttribute="article" style="margin: 0 auto;"
+											cssClass="col-lg-6" action="${createUrl}" role="form">
+											<div class="form-group">
+												<label>Title</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-bars"></i></span>
+													<form:input path="title" type="text"
+														placeholder="Enter title" cssClass="form-control"
+														required="required" />
+												</div>
+												<form:errors path="title" cssClass="error-msg" />
+											</div>
+											<div class="form-group">
+												<label>Category</label>
+												<div class="input-group">
+													<span class="input-group-addon"><i
+														class="fa fa-book"></i></span>
+													<form:input path="category" type="text"
+														placeholder="Enter category" cssClass="form-control"
+														required="required" />
+												</div>
+												<form:errors path="category" cssClass="error-msg" />
+											</div>
+											<div class="box-footer">
+												<button type="submit" class="btn btn-success submitButton">
+													<i class="fa fa-plus"></i> Create
+												</button>
+											</div>
+										</form:form>
+									</div>
 								</div>
-								<p>Total No Of Article</p>
-								<h1>${totalArticle}</h1>
 							</div>
 						</div>
 					</div>

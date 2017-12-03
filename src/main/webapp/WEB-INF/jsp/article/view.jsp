@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,19 +33,20 @@
 								<div class="col-md-1"></div>
 								<div class="col-md-2">
 									<ul class="nav nav-pills nav-stacked">
-										<li><a href='<c:url value="/"/>'><i class="fa fa-home"></i> Home</a></li>
+										<li><a href='<c:url value="/"/>'><i
+												class="fa fa-home"></i> Home</a></li>
 									</ul>
 								</div>
 								<div class="col-md-2">
 									<ul class="nav nav-pills nav-stacked">
-										<li><a href='<c:url value="/article/create"/>'><i class="fa fa-plus"></i> Add
-												Article</a></li>
+										<li><a href='<c:url value="/article/create"/>'><i
+												class="fa fa-plus"></i> Add Article</a></li>
 									</ul>
 								</div>
 								<div class="col-md-2">
 									<ul class="nav nav-pills nav-stacked">
-										<li><a href='<c:url value="/article/list"/>'><i class="fa fa-list"></i> All
-												Article</a></li>
+										<li><a href='<c:url value="/article/list"/>'><i
+												class="fa fa-list"></i> All Article</a></li>
 									</ul>
 								</div>
 							</div>
@@ -54,11 +56,64 @@
 						<div class="info d-flex align-items-center">
 							<div class="content text-center"
 								style="width: 80%; margin: 0 auto;">
-								<div class="logo">
-									<h1>Article</h1>
+								<c:if test="${!empty info}">
+									<div class="alert alert-warning alert-white rounded">
+										<c:out value="${info}" />
+									</div>
+								</c:if>
+								<c:if test="${!empty success}">
+									<div class="alert alert-success alert-white rounded">
+										<c:out value="${success}" />
+									</div>
+								</c:if>
+								<c:if test="${!empty error}">
+									<div class="alert alert-danger alert-white rounded">
+										<c:out value="${error}" />
+									</div>
+								</c:if>
+								<div class="clearfix"></div>
+								<div class="card">
+									<div class="card-header d-flex align-items-center">
+										<h3 class="h4" style="color: #000;">
+											View Article :
+											<c:out value="${article.title}" />
+										</h3>
+									</div>
+									<div class="card-body">
+										<table class="table">
+											<tbody>
+												<tr>
+													<td>Title</td>
+													<td><c:out value="${article.title}" /></td>
+												</tr>
+												<tr>
+													<td>Category</td>
+													<td><c:out value="${article.category}" /></td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="row">
+											<div class="col-lg-8">&nbsp;</div>
+											<div class="col-lg-2">
+												<a href='<c:url value="/article/edit/${article.id}" />'
+													class="btn btn-success"><i class="fa fa-pencil"></i>
+													Edit</a>
+											</div>
+											<div class="col-lg-2">
+												<c:url var="deleteUrl" value="/article/delete" />
+												<form:form method="post" style="margin: 0 auto;"
+													action="${deleteUrl}" role="form">
+													<input type="hidden" name="id" value="${article.id}">
+													<div class="box-footer">
+														<button type="submit" class="btn btn-danger deleteButton">
+															<i class="fa fa-trash"></i> Delete
+														</button>
+													</div>
+												</form:form>
+											</div>
+										</div>
+									</div>
 								</div>
-								<p>Total No Of Article</p>
-								<h1>${totalArticle}</h1>
 							</div>
 						</div>
 					</div>

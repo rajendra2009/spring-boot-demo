@@ -14,4 +14,12 @@ import com.rajendra.demo.entity.Article;
 @Repository
 public interface ArticleRepository extends CrudRepository<Article, Long> {
 
+	/**
+	 * Find {@link Article} by id
+	 * 
+	 * @param id
+	 * @return {@link Article}
+	 */
+	Article findById(long id);
+
 }
